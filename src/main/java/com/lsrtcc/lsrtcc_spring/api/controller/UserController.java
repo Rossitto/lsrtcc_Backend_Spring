@@ -56,7 +56,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User add(@RequestBody User user) {
+    public User add(@Valid @RequestBody User user) {
         return registerUser.save(user);
     }
 
