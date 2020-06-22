@@ -39,12 +39,12 @@ public class UserController {
     private RegisterUserService registerUser;
 
     @GetMapping
-    public List<User> listar() {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> buscar(@PathVariable Long userId) {
+    public ResponseEntity<User> getById(@PathVariable Long userId) {
         Optional<User> user = userRepository.findById(userId);
 
         if (user.isPresent()) {
@@ -56,12 +56,12 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User adicionar(@Valid @RequestBody User user) {
+    public User post(@Valid @RequestBody User user) {
         return registerUser.save(user);
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<User> atualizar(@Valid @PathVariable Long userId, @RequestBody User user) {
+    public ResponseEntity<User> put(@Valid @PathVariable Long userId, @RequestBody User user) {
 
         if (!userRepository.existsById(userId)) {
             return ResponseEntity.notFound().build();
@@ -74,12 +74,12 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> remover(@PathVariable("userId") Long userId) {
+    public ResponseEntity<Void> delete(@PathVariable("userId") Long userId) {
         if (!userRepository.existsById(userId)) {
             return ResponseEntity.notFound().build();
         }
 
-        registerUser.remove(userId);
+        registerUser.delete(userId);
 
         return ResponseEntity.noContent().build();
     }

@@ -32,7 +32,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         var problem = new Problem();
         problem.setStatus(status.value());
         problem.setTitulo(ex.getMessage());
-        problem.setDatahora(LocalDateTime.now());
+        problem.setDatetime(LocalDateTime.now());
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
     }
@@ -41,20 +41,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-        var campos = new ArrayList<Problem.Campo>();
+        var fields = new ArrayList<Problem.Field>();
 
         for (ObjectError error : ex.getBindingResult().getAllErrors()) {
-            String nome = ((FieldError) error).getField();
-            String mensagem = messageSource.getMessage(error, LocaleContextHolder.getLocale());
+            String name = ((FieldError) error).getField();
+            String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
 
-            campos.add(new Problem.Campo(nome, mensagem));
+            fields.add(new Problem.Field(name, message));
         }
 
         var problem = new Problem();
         problem.setStatus(status.value());
         problem.setTitulo("Um ou mais campos estão inválidos. " + "Faça o preenchimento correto e tente novamente. =)");
-        problem.setDatahora(LocalDateTime.now());
-        problem.setCampos(campos);
+        problem.setDatetime(LocalDateTime.now());
+        problem.setFields(fields);
 
         return super.handleExceptionInternal(ex, problem, headers, status, request);
     }

@@ -15,17 +15,17 @@ import lombok.Setter;
 public class Problem {
 
     private Integer status;
-    private LocalDateTime datahora;
+    private LocalDateTime datetime;
     private String titulo;
-    private List<Campo> campos;
+    private List<Field> fields;
 
-    public static class Campo {
-        private String nome;
-        private String mensagem;
+    public static class Field {
+        private String name;
+        private String message;
 
-        public Campo(String nome, String mensagem) {
-            this.nome = nome;
-            this.mensagem = mensagem;
+        public Field(String name, String message) {
+            this.name = name;
+            this.message = message;
 
         }
 

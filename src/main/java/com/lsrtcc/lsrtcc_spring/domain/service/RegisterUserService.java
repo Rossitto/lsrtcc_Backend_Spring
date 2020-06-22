@@ -14,16 +14,16 @@ public class RegisterUserService {
     private UserRepository userRepository;
 
     public User save(User user) {
-        User userExistente = userRepository.findByEmail(user.getEmail());
+        User existingUser = userRepository.findByEmail(user.getEmail());
 
-        if (userExistente != null && !userExistente.equals(user)) {
-            throw new DomainException("Já existe um user cadastrado com este e-mail.");
+        if (existingUser != null && !existingUser.equals(user)) {
+            throw new DomainException("Já existe um usuário cadastrado com este e-mail.");
         }
 
         return userRepository.save(user);
     }
 
-    public void remove(Long userId) {
+    public void delete(Long userId) {
         userRepository.deleteById(userId);
 
     }

@@ -18,7 +18,7 @@ public class User {
 
     @NotBlank
     @Size(max = 60)
-    private String nome;
+    private String name;
 
     @NotBlank
     @Email
@@ -27,15 +27,15 @@ public class User {
 
     @NotBlank
     @Size(max = 20)
-    // @Column(name = "telefone") COMENTEI PQ EU RENOMEEI DIRETO NA TABELA
+    // @Column(name = "phone") COMENTEI PQ EU RENOMEEI DIRETO NA TABELA
     private String phone;
 
     public Long getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {
@@ -50,8 +50,8 @@ public class User {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setEmail(String email) {
