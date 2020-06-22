@@ -18,11 +18,11 @@
 	</properties>
 
 	<dependencies>
-		<!-- <dependency> -->
-		<!-- <groupId>javax.validation</groupId> -->
-		<!-- <artifactId>validation-api</artifactId> -->
-		<!-- <version>1.0.0.GA</version> MANTER ESSA LINHA COMENTADA  -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<!-- <version>1.0.0.GA</version> MANTER ESSA LINHA COMENTADA  -->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
