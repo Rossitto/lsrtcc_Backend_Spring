@@ -16,16 +16,16 @@ public class Problem {
 
     private Integer status;
     private LocalDateTime datetime;
-    private String titulo;
+    private String title;
     private List<Field> fields;
 
     public static class Field {
         private String name;
-        private String message;
+        private String msg;
 
-        public Field(String name, String message) {
+        public Field(String name, String msg) {
             this.name = name;
-            this.message = message;
+            this.msg = msg;
 
         }
 

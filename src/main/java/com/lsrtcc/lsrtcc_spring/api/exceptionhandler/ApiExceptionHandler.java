@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Autowired
-    private MessageSource messageSource;
+    private MessageSource msgSource;
 
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<Object> handleDomain(DomainException ex, WebRequest request) {
@@ -31,7 +31,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         var problem = new Problem();
         problem.setStatus(status.value());
-        problem.setTitulo(ex.getMessage());
+        problem.setTitle(ex.getMessage());
         problem.setDatetime(LocalDateTime.now());
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
@@ -45,14 +45,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             String name = ((FieldError) error).getField();
-            String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
+            String msg = msgSource.getMessage(error, LocaleContextHolder.getLocale());
 
-            fields.add(new Problem.Field(name, message));
+            fields.add(new Problem.Field(name, msg));
         }
 
         var problem = new Problem();
         problem.setStatus(status.value());
-        problem.setTitulo("Um ou mais campos estão inválidos. " + "Faça o preenchimento correto e tente novamente. =)");
+        problem.setTitle("Um ou mais campos estão inválidos. " + "Faça o preenchimento correto e tente novamente. =)");
         problem.setDatetime(LocalDateTime.now());
         problem.setFields(fields);
 

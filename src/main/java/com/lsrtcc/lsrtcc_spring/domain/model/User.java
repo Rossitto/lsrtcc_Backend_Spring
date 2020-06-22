@@ -27,7 +27,6 @@ public class User {
 
     @NotBlank
     @Size(max = 20)
-    // @Column(name = "phone") COMENTEI PQ EU RENOMEEI DIRETO NA TABELA
     private String phone;
 
     public Long getId() {
