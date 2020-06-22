@@ -2,7 +2,7 @@ package com.lsrtcc.lsrtcc_spring.domain.repository;
 
 import java.util.List;
 
-import com.lsrexample.lsrexample.domain.model.Cliente;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

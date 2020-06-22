@@ -1,8 +1,8 @@
 package com.lsrtcc.lsrtcc_spring.domain.service;
 
-import com.lsrexample.lsrexample.domain.exception.NegocioException;
-import com.lsrexample.lsrexample.domain.model.Cliente;
-import com.lsrexample.lsrexample.domain.repository.ClienteRepository;
+import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
+import com.lsrtcc.lsrtcc_spring.domain.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,20 +11,20 @@ import org.springframework.stereotype.Service;
 public class RegisterUserService {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private UserRepository userRepository;
 
-    public Cliente salvar(Cliente cliente) {
-        Cliente clienteExistente = clienteRepository.findByEmail(cliente.getEmail());
+    public User save(User user) {
+        User userExistente = userRepository.findByEmail(user.getEmail());
 
-        if (clienteExistente != null && !clienteExistente.equals(cliente)) {
-            throw new NegocioException("Já existe um cliente cadastrado com este e-mail.");
+        if (userExistente != null && !userExistente.equals(user)) {
+            throw new DomainException("Já existe um user cadastrado com este e-mail.");
         }
 
-        return clienteRepository.save(cliente);
+        return userRepository.save(user);
     }
 
-    public void excluir(Long clienteId) {
-        clienteRepository.deleteById(clienteId);
+    public void remove(Long userId) {
+        userRepository.deleteById(userId);
 
     }
 

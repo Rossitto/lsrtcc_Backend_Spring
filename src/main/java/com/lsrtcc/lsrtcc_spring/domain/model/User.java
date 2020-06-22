@@ -70,7 +70,7 @@ public class User {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Cliente other = (Cliente) obj;
+        User other = (User) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

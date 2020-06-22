@@ -3,7 +3,7 @@ package com.lsrtcc.lsrtcc_spring.api.exceptionhandler;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.lsrexample.lsrexample.domain.exception.NegocioException;
+import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -25,39 +25,38 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
-    @ExceptionHandler(NegocioException.class)
-    public ResponseEntity<Object> handleNegocio(NegocioException ex, WebRequest request) {
+    @ExceptionHandler(DomainException.class)
+    public ResponseEntity<Object> handleDomain(DomainException ex, WebRequest request) {
         var status = HttpStatus.BAD_REQUEST;
 
-        var problema = new Problema();
-        problema.setStatus(status.value());
-        problema.setTitulo(ex.getMessage());
-        problema.setDatahora(LocalDateTime.now());
+        var problem = new Problem();
+        problem.setStatus(status.value());
+        problem.setTitulo(ex.getMessage());
+        problem.setDatahora(LocalDateTime.now());
 
-        return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-        var campos = new ArrayList<Problema.Campo>();
+        var campos = new ArrayList<Problem.Campo>();
 
         for (ObjectError error : ex.getBindingResult().getAllErrors()) {
             String nome = ((FieldError) error).getField();
             String mensagem = messageSource.getMessage(error, LocaleContextHolder.getLocale());
 
-            campos.add(new Problema.Campo(nome, mensagem));
+            campos.add(new Problem.Campo(nome, mensagem));
         }
 
-        var problema = new Problema();
-        problema.setStatus(status.value());
-        problema.setTitulo(
-                "Um ou mais campos estão inválidos. " + "Faça o preenchimento correto e tente novamente. =)");
-        problema.setDatahora(LocalDateTime.now());
-        problema.setCampos(campos);
+        var problem = new Problem();
+        problem.setStatus(status.value());
+        problem.setTitulo("Um ou mais campos estão inválidos. " + "Faça o preenchimento correto e tente novamente. =)");
+        problem.setDatahora(LocalDateTime.now());
+        problem.setCampos(campos);
 
-        return super.handleExceptionInternal(ex, problema, headers, status, request);
+        return super.handleExceptionInternal(ex, problem, headers, status, request);
     }
 
 }

@@ -7,9 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
-import com.lsrexample.lsrexample.domain.model.Cliente;
-import com.lsrexample.lsrexample.domain.repository.ClienteRepository;
-import com.lsrexample.lsrexample.domain.service.CadastroClienteService;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
+import com.lsrtcc.lsrtcc_spring.domain.repository.UserRepository;
+import com.lsrtcc.lsrtcc_spring.domain.service.RegisterUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,22 +33,22 @@ public class UserController {
     private EntityManager manager;
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private CadastroClienteService cadastroCliente;
+    private RegisterUserService registerUser;
 
     @GetMapping
-    public List<Cliente> listar() {
-        return clienteRepository.findAll();
+    public List<User> listar() {
+        return userRepository.findAll();
     }
 
-    @GetMapping("/{clienteId}")
-    public ResponseEntity<Cliente> buscar(@PathVariable Long clienteId) {
-        Optional<Cliente> cliente = clienteRepository.findById(clienteId);
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> buscar(@PathVariable Long userId) {
+        Optional<User> user = userRepository.findById(userId);
 
-        if (cliente.isPresent()) {
-            return ResponseEntity.ok(cliente.get());
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
         }
 
         return ResponseEntity.notFound().build();
@@ -56,30 +56,30 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
-        return cadastroCliente.salvar(cliente);
+    public User adicionar(@Valid @RequestBody User user) {
+        return registerUser.save(user);
     }
 
-    @PutMapping("/{clienteId}")
-    public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, @RequestBody Cliente cliente) {
+    @PutMapping("/{userId}")
+    public ResponseEntity<User> atualizar(@Valid @PathVariable Long userId, @RequestBody User user) {
 
-        if (!clienteRepository.existsById(clienteId)) {
+        if (!userRepository.existsById(userId)) {
             return ResponseEntity.notFound().build();
         }
 
-        cliente.setId(clienteId);
-        cliente = cadastroCliente.salvar(cliente);
+        user.setId(userId);
+        user = registerUser.save(user);
 
-        return ResponseEntity.ok(cliente);
+        return ResponseEntity.ok(user);
     }
 
-    @DeleteMapping("/{clienteId}")
-    public ResponseEntity<Void> remover(@PathVariable("clienteId") Long clienteId) {
-        if (!clienteRepository.existsById(clienteId)) {
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> remover(@PathVariable("userId") Long userId) {
+        if (!userRepository.existsById(userId)) {
             return ResponseEntity.notFound().build();
         }
 
-        cadastroCliente.excluir(clienteId);
+        registerUser.remove(userId);
 
         return ResponseEntity.noContent().build();
     }
