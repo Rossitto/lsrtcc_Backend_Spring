@@ -7,6 +7,7 @@ import com.lsrtcc.lsrtcc_spring.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// regras de negócio vem aqui
 @Service
 public class RegisterUserService {
 
