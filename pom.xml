@@ -10,8 +10,8 @@
 	<groupId>com.lsrtcc</groupId>
 	<artifactId>lsrtcc_spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>lsrtcc</name>
+	<description>Lucas Schroeder Rossi's final paper for Specialization in Software Engineering at UFPR</description>
 
 	<properties>
 		<java.version>14</java.version>
