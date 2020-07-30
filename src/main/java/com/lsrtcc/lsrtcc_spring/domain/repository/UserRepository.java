@@ -7,7 +7,7 @@ import com.lsrtcc.lsrtcc_spring.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-// JpaRepository<Tipo da Classe e qual é o tipo do ID> -> por isso Long
+// extends: JpaRepository<Tipo da Classe e qual é o tipo do ID> -> por isso Long
 // REPOSITORY FAZ CONSULTAS NO BANCO DE DADOS.
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
