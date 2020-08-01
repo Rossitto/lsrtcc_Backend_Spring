@@ -13,12 +13,18 @@ public class RegisterBandService {
     @Autowired
     private BandRepository bandRepository;
 
-    // TODO: email da banda não pode ser igual a nenhum email de usuário.
+    // TODO: email da banda não pode ser igual a nenhum email de usuário. Por quê?
     public Band save(Band band) {
         Band existingBand = bandRepository.findByEmail(band.getEmail());
 
         if (existingBand != null && !existingBand.equals(band)) {
-            throw new DomainException("Já existe uma banda cadastrada com este email");
+            throw new DomainException("Já existe uma banda cadastrada com este email.");
+        }
+
+        Band existingBandCnpj = bandRepository.findByCnpj(band.getCnpj());
+
+        if (existingBandCnpj != null && !existingBandCnpj.equals(band)) {
+            throw new DomainException("Já existe uma banda cadastrada com este CNPJ.");
         }
 
         return bandRepository.save(band);

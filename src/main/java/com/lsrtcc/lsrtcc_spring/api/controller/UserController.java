@@ -38,11 +38,13 @@ public class UserController {
     @Autowired
     private RegisterUserService registerUser;
 
+    // @GetMapping(produces = "application/json; charset=UFT-8")
     @GetMapping
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
+    // @GetMapping(produces = "application/json; charset=UFT-8")
     @GetMapping("/{userId}")
     public ResponseEntity<User> getById(@PathVariable Long userId) {
         Optional<User> user = userRepository.findById(userId);

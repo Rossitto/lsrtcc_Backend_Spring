@@ -16,6 +16,8 @@ public interface BandRepository extends JpaRepository<Band, Long> {
 
     List<Band> findByNameContaining(String name);
 
+    Band findByCnpj(String cnpj);
+
     // // TODO: test if method below is working: findByStyleContaining
     // List<Band> findByStyleContaining(String style);
 

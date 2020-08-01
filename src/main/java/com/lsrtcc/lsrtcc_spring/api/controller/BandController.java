@@ -38,11 +38,13 @@ public class BandController {
     @Autowired
     private RegisterBandService registerBandService;
 
+    // @GetMapping(produces = "application/json; charset=UFT-8")
     @GetMapping
     public List<Band> getAll() {
         return bandRepository.findAll();
     }
 
+    // @GetMapping(produces = "application/json; charset=UFT-8")
     @GetMapping("/{bandId}")
     public ResponseEntity<Band> getById(@PathVariable Long bandId) {
         Optional<Band> band = bandRepository.findById(bandId);
