@@ -28,11 +28,12 @@ public class Band {
     @Size(max = 10)
     private double fee_brl;
 
-    @NumberFormat
-    private int members_qtd;
+    // @NumberFormat
+    private int members_num;
 
+    // TODO: maybe make it a ENUM someday
     @Size(max = 50)
-    private String style; // maybe make it a ENUM someday
+    private String style;
 
     @NotBlank
     @Size(max = 20)
@@ -75,12 +76,12 @@ public class Band {
         this.fee_brl = fee_brl;
     }
 
-    public int getMembers_qtd() {
-        return members_qtd;
+    public int getMembers_num() {
+        return members_num;
     }
 
-    public void setMembers_qtd(int members_qtd) {
-        this.members_qtd = members_qtd;
+    public void setMembers_num(int members_num) {
+        this.members_num = members_num;
     }
 
     public String getStyle() {

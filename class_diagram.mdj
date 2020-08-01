@@ -478,7 +478,7 @@
 											"top": 218,
 											"width": 143,
 											"height": 13,
-											"text": "+members_qtd: smallint",
+											"text": "+members_num: smallint",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2268,7 +2268,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFzjOLdCKp8R9g="
 							},
-							"name": "members_qtd",
+							"name": "members_num",
 							"type": "smallint"
 						},
 						{

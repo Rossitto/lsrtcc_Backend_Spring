@@ -3,6 +3,8 @@ package com.lsrtcc.lsrtcc_spring.api.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 import com.lsrtcc.lsrtcc_spring.domain.model.Band;
@@ -10,8 +12,8 @@ import com.lsrtcc.lsrtcc_spring.domain.repository.BandRepository;
 import com.lsrtcc.lsrtcc_spring.domain.service.RegisterBandService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,11 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-// TODO: criar band API Controller
-
 @RestController
 @RequestMapping("/bands")
 public class BandController {
+
+    // acho que essa linha de baixo está sobrando no meu código... mas não sei.
+    @PersistenceContext
+    private EntityManager manager;
 
     @Autowired
     private BandRepository bandRepository;

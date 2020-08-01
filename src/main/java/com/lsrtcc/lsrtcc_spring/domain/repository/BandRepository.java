@@ -16,8 +16,8 @@ public interface BandRepository extends JpaRepository<Band, Long> {
 
     List<Band> findByNameContaining(String name);
 
-    // TODO: test if method below is working: findByStyleContaining
-    List<Band> findByStyleContaining(String style);
+    // // TODO: test if method below is working: findByStyleContaining
+    // List<Band> findByStyleContaining(String style);
 
     // // TODO: this method were causeing the application to failt. So, I commented
     // it (01/08/2020)

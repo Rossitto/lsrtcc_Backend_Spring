@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS band (
     name varchar(30),
     cnpj varchar(22),
     fee_brl decimal(7, 2),
-    members_qdt smallint,
+    members_num smallint,
     style varchar(50),
     phone varchar(20),
     email varchar(100),

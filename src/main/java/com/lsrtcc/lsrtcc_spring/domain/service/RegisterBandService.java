@@ -13,7 +13,7 @@ public class RegisterBandService {
     @Autowired
     private BandRepository bandRepository;
 
-    // TODO: email da banda não pode ser igual a nenhum email de usuário!
+    // TODO: email da banda não pode ser igual a nenhum email de usuário.
     public Band save(Band band) {
         Band existingBand = bandRepository.findByEmail(band.getEmail());
 
