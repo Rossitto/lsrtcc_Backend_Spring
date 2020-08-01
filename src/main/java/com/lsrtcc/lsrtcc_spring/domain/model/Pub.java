@@ -4,44 +4,55 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.NumberFormat;
 
 @Entity
-public class Band {
+public class Pub {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Size(max = 30)
+    @Size(max = 60)
     private String name;
 
+    @NotBlank
     @Size(max = 22)
     private String cnpj;
 
-    // TODO: incluir @NumberFormat ?
-    @Size(max = 10)
-    private double fee_brl;
+    @NotBlank
+    @Size(max = 300)
+    private String address;
 
+    @NotBlank
     @NumberFormat
-    private int members_num;
+    private Integer address_num;
 
-    // TODO: maybe make it a ENUM someday
-    @Size(max = 50)
-    private String style;
+    // TODO: deixar @Size(max = 8) e garantir que não venham hífens nem nada.
+    @NotBlank
+    @NumberFormat
+    @Size(max = 9)
+    private Integer address_cep;
+
+    @NotBlank
+    @Size(max = 60)
+    private String city;
+
+    @NotBlank
+    @Size(max = 2)
+    private String state;
 
     @NotBlank
     @Size(max = 20)
     private String phone;
 
+    // TODO: adicionar @Email aqui?
     @NotBlank
-    @Email
-    @Size(max = 100)
+    @Size(max = 60)
     private String email;
 
     public Long getId() {
@@ -68,28 +79,44 @@ public class Band {
         this.cnpj = cnpj;
     }
 
-    public double getFee_brl() {
-        return fee_brl;
+    public String getAddress() {
+        return address;
     }
 
-    public void setFee_brl(double fee_brl) {
-        this.fee_brl = fee_brl;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public int getMembers_num() {
-        return members_num;
+    public Integer getAddress_num() {
+        return address_num;
     }
 
-    public void setMembers_num(int members_num) {
-        this.members_num = members_num;
+    public void setAddress_num(Integer address_num) {
+        this.address_num = address_num;
     }
 
-    public String getStyle() {
-        return style;
+    public Integer getAddress_cep() {
+        return address_cep;
     }
 
-    public void setStyle(String style) {
-        this.style = style;
+    public void setAddress_cep(Integer address_cep) {
+        this.address_cep = address_cep;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getPhone() {
@@ -124,7 +151,7 @@ public class Band {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Band other = (Band) obj;
+        Pub other = (Pub) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
