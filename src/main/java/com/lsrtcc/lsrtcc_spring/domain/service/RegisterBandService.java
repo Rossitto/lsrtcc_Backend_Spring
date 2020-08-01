@@ -1,5 +1,6 @@
 package com.lsrtcc.lsrtcc_spring.domain.service;
 
+import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
 import com.lsrtcc.lsrtcc_spring.domain.model.Band;
 import com.lsrtcc.lsrtcc_spring.domain.repository.BandRepository;
 
