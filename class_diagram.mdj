@@ -461,7 +461,7 @@
 											"top": 203,
 											"width": 143,
 											"height": 13,
-											"text": "+fee_brl: decimal(7,2)",
+											"text": "+fee_brl: decimal(8,2)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2260,7 +2260,7 @@
 								"$ref": "AAAAAAFzjOLdCKp8R9g="
 							},
 							"name": "fee_brl",
-							"type": "decimal(7,2)"
+							"type": "decimal(8,2)"
 						},
 						{
 							"_type": "UMLAttribute",
