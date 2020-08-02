@@ -21,11 +21,13 @@ public class RegisterBandService {
             throw new DomainException("Já existe uma banda cadastrada com este email.");
         }
 
-        Band existingBandCnpj = bandRepository.findByCnpj(band.getCnpj());
+        // TODO: implementar erro se CPNJ já for cadastrado. Mas deixar cadastrar nulo
+        // (assim não está deixando).
+        // Band existingBandCnpj = bandRepository.findByCnpj(band.getCnpj());
 
-        if (existingBandCnpj != null && !existingBandCnpj.equals(band)) {
-            throw new DomainException("Já existe uma banda cadastrada com este CNPJ.");
-        }
+        // if (existingBandCnpj != null && !existingBandCnpj.equals(band)) {
+        // throw new DomainException("Já existe uma banda cadastrada com este CNPJ.");
+        // }
 
         return bandRepository.save(band);
     }
