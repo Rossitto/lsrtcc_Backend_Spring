@@ -18,13 +18,13 @@ public class RegisterPubService {
         Pub existingPub = pubRepository.findByEmail(pub.getEmail());
 
         if (existingPub != null && !existingPub.equals(pub)) {
-            throw new DomainException("Já existe uma casa noturna cadastrada com este e-mail.");
+            throw new DomainException("Já existe um pub cadastrado com este e-mail.");
         }
 
         Pub existingPubCnpj = pubRepository.findByCnpj(pub.getCnpj());
 
         if (existingPubCnpj != null && !existingPubCnpj.equals(pub)) {
-            throw new DomainException("Já existe uma casa noturna cadastrada com este CNPJ.");
+            throw new DomainException("Já existe um pub cadastrado com este CNPJ.");
         }
 
         return pubRepository.save(pub);
