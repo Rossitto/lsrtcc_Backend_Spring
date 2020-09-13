@@ -1,6 +1,6 @@
 package com.lsrtcc.lsrtcc_spring.domain.model;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +25,7 @@ public class ShowSchedule {
     private Long band_id;
 
     @NotBlank
-    private OffsetDateTime event_datetime;
+    private LocalDateTime event_datetime;
 
     @Override
     public int hashCode() {
@@ -52,7 +52,7 @@ public class ShowSchedule {
         return true;
     }
 
-    public ShowSchedule(Long pub_id, Long band_id, @NotBlank OffsetDateTime event_datetime) {
+    public ShowSchedule(Long pub_id, Long band_id, @NotBlank LocalDateTime event_datetime) {
         this.pub_id = pub_id;
         this.band_id = band_id;
         this.event_datetime = event_datetime;

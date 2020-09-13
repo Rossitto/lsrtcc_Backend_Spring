@@ -1,6 +1,6 @@
 package com.lsrtcc.lsrtcc_spring.domain.service;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
 import com.lsrtcc.lsrtcc_spring.domain.model.Band;
@@ -40,7 +40,7 @@ public class ManageShowSchedule {
         return showScheduleRepository.save(showSchedule);
     }
 
-    public void changeShowSchedule(Long showScheduleId, OffsetDateTime event_datetime) {
+    public void changeShowSchedule(Long showScheduleId, LocalDateTime event_datetime) {
         ShowSchedule showSchedule = findShowSchedule(showScheduleId);
 
         showSchedule.setEvent_datetime(event_datetime);
