@@ -14,7 +14,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class ShowCalendar {
+public class ShowSchedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,13 +43,19 @@ public class ShowCalendar {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ShowCalendar other = (ShowCalendar) obj;
+        ShowSchedule other = (ShowSchedule) obj;
         if (band_id == null) {
             if (other.band_id != null)
                 return false;
         } else if (!band_id.equals(other.band_id))
             return false;
         return true;
+    }
+
+    public ShowSchedule(Long pub_id, Long band_id, @NotBlank OffsetDateTime event_datetime) {
+        this.pub_id = pub_id;
+        this.band_id = band_id;
+        this.event_datetime = event_datetime;
     }
 
 }
