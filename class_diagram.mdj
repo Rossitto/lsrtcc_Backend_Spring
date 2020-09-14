@@ -2163,7 +2163,7 @@
 											"top": 423,
 											"width": 173.76708984375,
 											"height": 13,
-											"text": "Show_Schedule"
+											"text": "Show"
 										},
 										{
 											"_type": "LabelView",
@@ -2338,7 +2338,24 @@
 											"top": 491,
 											"width": 173.76708984375,
 											"height": 13,
-											"text": "+event_datetime: datetime",
+											"text": "+date: date",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF0jskgjfiiuQk=",
+											"_parent": {
+												"$ref": "AAAAAAF0g1qVRpd0Gn0="
+											},
+											"model": {
+												"$ref": "AAAAAAF0jskgbPiZwTs="
+											},
+											"font": "Arial;13;0",
+											"left": 485,
+											"top": 506,
+											"width": 173.76708984375,
+											"height": 13,
+											"text": "+start_at: time",
 											"horizontalAlignment": 0
 										}
 									],
@@ -2346,7 +2363,7 @@
 									"left": 480,
 									"top": 441,
 									"width": 183.76708984375,
-									"height": 68
+									"height": 83
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -2359,7 +2376,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 480,
-									"top": 509,
+									"top": 524,
 									"width": 183.76708984375,
 									"height": 10
 								},
@@ -3628,7 +3645,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Show_Schedule",
+					"name": "Show",
 					"attributes": [
 						{
 							"_type": "UMLAttribute",
@@ -3692,8 +3709,17 @@
 							"_parent": {
 								"$ref": "AAAAAAF0g1qVRJdsukc="
 							},
-							"name": "event_datetime",
-							"type": "datetime"
+							"name": "date",
+							"type": "date"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAF0jskgbPiZwTs=",
+							"_parent": {
+								"$ref": "AAAAAAF0g1qVRJdsukc="
+							},
+							"name": "start_at",
+							"type": "time"
 						}
 					]
 				}

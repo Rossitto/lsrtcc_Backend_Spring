@@ -26,7 +26,7 @@ public class ManageShowSchedule {
     private PubRepository pubRepository;
 
     // TODO: verificar se vai funcionar para marcar o datahora
-    public ShowSchedule createShowSchedule(ShowSchedule showSchedule) {
+    public ShowSchedule save(ShowSchedule showSchedule) {
         Pub pub = pubRepository.findById(showSchedule.getPub_id())
                 .orElseThrow(() -> new DomainException("Pub não encontrado"));
 
@@ -40,19 +40,19 @@ public class ManageShowSchedule {
         return showScheduleRepository.save(showSchedule);
     }
 
-    public void changeShowSchedule(Long showScheduleId, LocalDateTime event_datetime) {
-        ShowSchedule showSchedule = findShowSchedule(showScheduleId);
+    public void change(Long showScheduleId, LocalDateTime event_datetime) {
+        ShowSchedule showSchedule = find(showScheduleId);
 
         showSchedule.setEvent_datetime(event_datetime);
 
     }
 
-    private ShowSchedule findShowSchedule(Long showScheduleId) {
+    private ShowSchedule find(Long showScheduleId) {
         return showScheduleRepository.findById(showScheduleId)
                 .orElseThrow(() -> new DomainException("Show não encontrado"));
     }
 
-    public void deleteShowSchedule(Long showScheduleId) {
+    public void delete(Long showScheduleId) {
         showScheduleRepository.deleteById(showScheduleId);
     }
 

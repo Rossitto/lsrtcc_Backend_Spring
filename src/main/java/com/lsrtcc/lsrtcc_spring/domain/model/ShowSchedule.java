@@ -52,10 +52,12 @@ public class ShowSchedule {
         return true;
     }
 
-    public ShowSchedule(Long pub_id, Long band_id, @NotBlank LocalDateTime event_datetime) {
-        this.pub_id = pub_id;
-        this.band_id = band_id;
-        this.event_datetime = event_datetime;
-    }
+    // // COM O CONSTRUCTOR, A API DAVA INTERNAL SERVER ERROR 500 !!!
+    // public ShowSchedule(Long pub_id, Long band_id, @NotBlank LocalDateTime
+    // event_datetime) {
+    // this.pub_id = pub_id;
+    // this.band_id = band_id;
+    // this.event_datetime = event_datetime;
+    // }
 
 }
