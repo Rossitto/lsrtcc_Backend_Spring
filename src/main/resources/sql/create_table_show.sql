@@ -3,7 +3,7 @@ CREATE TABLE `show` (
   `pub_id` bigint DEFAULT NULL,
   `band_id` bigint DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `start_at` time DEFAULT NULL,
+  `time` time DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_show_schedule_pub_id` (`pub_id`),
   KEY `fk_show_schedule_band_id` (`band_id`),
