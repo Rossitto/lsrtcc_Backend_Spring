@@ -1,4 +1,4 @@
-CREATE TABLE `show` (
+CREATE TABLE `show_schedule` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `pub_id` bigint DEFAULT NULL,
   `band_id` bigint DEFAULT NULL,
