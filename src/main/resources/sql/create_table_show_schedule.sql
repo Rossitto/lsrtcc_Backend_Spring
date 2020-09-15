@@ -2,7 +2,7 @@ CREATE TABLE `show_schedule` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `pub_id` bigint DEFAULT NULL,
   `band_id` bigint DEFAULT NULL,
-  `datetime` datetime DEFAULT NULL,
+  `show_datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_show_schedule_pub_id` (`pub_id`),
   KEY `fk_show_schedule_band_id` (`band_id`),
