@@ -1,6 +1,7 @@
 package com.lsrtcc.lsrtcc_spring.domain.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
@@ -26,10 +27,7 @@ public class ShowSchedule {
     private Long band_id;
 
     @NotBlank
-    private LocalDate date;
-
-    @NotBlank
-    private LocalTime time;
+    private LocalDateTime dateTime;
 
     @Override
     public int hashCode() {

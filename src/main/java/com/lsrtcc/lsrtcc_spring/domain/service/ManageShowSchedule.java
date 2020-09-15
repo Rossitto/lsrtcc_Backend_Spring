@@ -42,11 +42,10 @@ public class ManageShowSchedule {
         return showScheduleRepository.save(showSchedule);
     }
 
-    public void change(Long showScheduleId, LocalDate date, LocalTime time) {
+    public void change(Long showScheduleId, LocalDateTime dateTime) {
         ShowSchedule showSchedule = find(showScheduleId);
 
-        showSchedule.setDate(date);
-        showSchedule.setTime(time);
+        showSchedule.setDateTime(dateTime);
 
     }
 
