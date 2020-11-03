@@ -43,7 +43,7 @@ public class ManageShowSchedule {
     public void change(Long showScheduleId, LocalDateTime dateTime) {
         ShowSchedule showSchedule = find(showScheduleId);
 
-        showSchedule.setShow_dateTime(dateTime);
+        showSchedule.setShow_datetime(dateTime);
 
     }
 

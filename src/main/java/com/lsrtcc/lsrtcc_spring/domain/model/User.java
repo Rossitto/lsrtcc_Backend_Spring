@@ -29,6 +29,10 @@ public class User {
     @Size(max = 20)
     private String phone;
 
+    @NotBlank
+    @Size(max = 60)
+    private String password;
+
     public Long getId() {
         return id;
     }
@@ -43,6 +47,14 @@ public class User {
 
     public String getPhone() {
         return phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setId(Long id) {
