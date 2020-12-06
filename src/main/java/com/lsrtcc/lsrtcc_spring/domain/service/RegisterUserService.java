@@ -5,6 +5,7 @@ import com.lsrtcc.lsrtcc_spring.domain.model.User;
 import com.lsrtcc.lsrtcc_spring.domain.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +32,20 @@ public class RegisterUserService {
     }
 
     // TODO: implementar este método. Revisar parmâmetro!
-    // public User authenticate(User user) {
-    // return user;
-    // }
+    public User authenticate(User user) {
+        User existingUser = userRepository.findByEmail(user.getEmail());
+
+        if (existingUser == null) {
+            throw new DomainException("Não existe nenhum usuário cadastrado com este e-mail.");
+        }
+
+        if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword()) == true) {
+            return existingUser;
+        } else {
+            throw new DomainException("Login falhou. Incorreto e-mail e/ou senha.");
+        }
+
+    }
 
     public void delete(Long userId) {
 
