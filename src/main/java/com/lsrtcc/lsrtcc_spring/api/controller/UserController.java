@@ -58,11 +58,11 @@ public class UserController {
 
     // Aqui será User user ?? pq terá apenas email e senha. O resto será null.
     // TODO: criar método authenticate() em UserService
-    @PostMapping
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public User authenticateUser(@RequestBody User user) {
-        return registerUser.authenticate(user);
-    }
+    // @PostMapping
+    // @ResponseStatus(HttpStatus.ACCEPTED)
+    // public User authenticateUser(@RequestBody User user) {
+    // return registerUser.authenticate(user);
+    // }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

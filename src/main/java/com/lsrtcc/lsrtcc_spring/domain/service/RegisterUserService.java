@@ -30,9 +30,10 @@ public class RegisterUserService {
         return userRepository.save(user);
     }
 
-    public User authenticate(User user) {
-        // TODO: implementar este método. Revisar parmâmetro!
-    }
+    // TODO: implementar este método. Revisar parmâmetro!
+    // public User authenticate(User user) {
+    // return user;
+    // }
 
     public void delete(Long userId) {
 
