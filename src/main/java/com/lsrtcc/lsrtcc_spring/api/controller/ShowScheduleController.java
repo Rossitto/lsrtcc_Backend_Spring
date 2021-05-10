@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -48,6 +49,16 @@ public class ShowScheduleController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/band/{bandId}")
+    public List<ShowSchedule> getByBandId(@PathVariable Long bandId) {
+        return showScheduleRepository.findByBand(bandId);
+    }
+
+    @GetMapping("/pub/{pubId}")
+    public List<ShowSchedule> getByPubId(@PathVariable Long pubId) {
+        return showScheduleRepository.findByPub(pubId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ShowSchedule add(@Valid @RequestBody ShowSchedule showSchedule) {
@@ -66,6 +77,22 @@ public class ShowScheduleController {
 
         return ResponseEntity.ok(showSchedule);
     }
+
+    // TODO: implementar apenas confirmar com uma chamada PUT sem nenhum body
+    // @PutMapping("/{showId}/confirm")
+    // public ResponseEntity<ShowSchedule> put(@Valid @PathVariable Long showId) {
+
+    // if (!showScheduleRepository.existsById(showId)) {
+    // return ResponseEntity.notFound().build();
+    // }
+
+    // ShowSchedule showSchedule;
+    // showSchedule.setId(showId);
+    // showSchedule = manageShowSchedule.confirm(showId);
+
+    // return ResponseEntity.ok(showSchedule);
+
+    // }
 
     @DeleteMapping("/{showId}")
     public ResponseEntity<Void> delete(@PathVariable("showId") Long showId) {

@@ -1,6 +1,7 @@
 package com.lsrtcc.lsrtcc_spring.domain.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
 import com.lsrtcc.lsrtcc_spring.domain.model.Band;
@@ -25,7 +26,6 @@ public class ManageShowSchedule {
     @Autowired
     private PubRepository pubRepository;
 
-    // TODO: verificar se vai funcionar para marcar o datahora
     public ShowSchedule save(ShowSchedule showSchedule) {
         Pub pub = pubRepository.findById(showSchedule.getPub_id())
                 .orElseThrow(() -> new DomainException("Pub não encontrado"));
@@ -40,17 +40,42 @@ public class ManageShowSchedule {
         return showScheduleRepository.save(showSchedule);
     }
 
-    public void change(Long showScheduleId, LocalDateTime dateTime) {
+    public void changeDateTime(Long showScheduleId, LocalDateTime dateTime) {
         ShowSchedule showSchedule = find(showScheduleId);
 
         showSchedule.setShow_datetime(dateTime);
 
     }
 
+    // public ShowSchedule confirm(Long showScheduleId) {
+    // ShowSchedule showSchedule = find(showScheduleId);
+
+    // showSchedule.setConfirmed(true);
+
+    // return showScheduleRepository.save(showSchedule);
+
+    // }
+
+    // public void unconfirm(Long showScheduleId) {
+    // ShowSchedule showSchedule = find(showScheduleId);
+
+    // showSchedule.setConfirmed(false);
+
+    // }
+
     private ShowSchedule find(Long showScheduleId) {
         return showScheduleRepository.findById(showScheduleId)
                 .orElseThrow(() -> new DomainException("Show não encontrado"));
     }
+
+    // public List<ShowSchedule> findByBand(Long bandId) {
+    // try {
+    // return showScheduleRepository.findByBand(bandId);
+    // } catch (Exception e) {
+    // throw new DomainException("Show não encontrado");
+    // }
+
+    // }
 
     public void delete(Long showScheduleId) {
         showScheduleRepository.deleteById(showScheduleId);

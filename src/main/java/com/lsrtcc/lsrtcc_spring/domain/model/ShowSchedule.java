@@ -32,4 +32,10 @@ public class ShowSchedule {
     @NotBlank
     private LocalDateTime show_datetime;
 
+    private boolean confirmed;
+
+    private LocalDateTime confirmed_at;
+
+    private LocalDateTime requested_at;
+
 }
