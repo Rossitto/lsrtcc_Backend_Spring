@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShowScheduleRepository extends JpaRepository<ShowSchedule, Long> {
 
-    @Query(value = "select * from show_schedule where band_id = :#{#bandId}", nativeQuery = true)
+    @Query(value = "select * from show_schedule where band_id = :bandId", nativeQuery = true)
     List<ShowSchedule> findByBand(@Param("bandId") Long band_id);
 
-    @Query(value = "select * from show_schedule where pub_id = :#{#pubId}", nativeQuery = true)
+    @Query(value = "select * from show_schedule where pub_id = :pubId", nativeQuery = true)
     List<ShowSchedule> findByPub(@Param("pubId") Long pub_id);
 
 }
