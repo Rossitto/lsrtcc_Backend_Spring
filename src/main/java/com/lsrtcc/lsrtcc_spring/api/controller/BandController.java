@@ -56,6 +56,11 @@ public class BandController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Band> getByUserId(@PathVariable Long userId) {
+        return bandRepository.findByUser(userId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Band add(@Valid @RequestBody Band band) {

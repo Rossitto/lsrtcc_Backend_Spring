@@ -50,6 +50,11 @@ public class PubController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Pub> getByUserId(@PathVariable Long userId) {
+        return pubRepository.findByUser(userId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Pub add(@Valid @RequestBody Pub pub) {
