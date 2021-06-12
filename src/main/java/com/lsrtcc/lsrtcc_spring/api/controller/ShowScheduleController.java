@@ -65,6 +65,7 @@ public class ShowScheduleController {
     }
 
     @PutMapping("/{showId}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ShowSchedule> put(@Valid @PathVariable Long showId, @RequestBody ShowSchedule showSchedule) {
 
         if (!showScheduleRepository.existsById(showId)) {

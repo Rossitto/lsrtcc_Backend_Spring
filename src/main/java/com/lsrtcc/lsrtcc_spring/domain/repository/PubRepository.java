@@ -20,7 +20,8 @@ public interface PubRepository extends JpaRepository<Pub, Long> {
 
     Pub findByCnpj(String cnpj);
 
-    @Query(value = "select * from pub as p inner join pub_manager as pm on p.id = pm.pub_id where pm.user_id = :userId", nativeQuery = true)
-    List<Pub> findByUser(@Param("userId") Long user_id);
+    // @Query(value = "select * from pub as p inner join pub_manager as pm on p.id =
+    // pm.pub_id where pm.user_id = :userId", nativeQuery = true)
+    // List<Pub> findByUser(@Param("userId") Long user_id);
 
 }
