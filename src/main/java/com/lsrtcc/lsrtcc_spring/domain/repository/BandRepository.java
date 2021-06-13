@@ -22,7 +22,7 @@ public interface BandRepository extends JpaRepository<Band, Long> {
 
     Band findByCnpj(String cnpj);
 
-    Optional<Band> findByUser(User user);
+    List<Band> findByUser(User user);
 
     // @Query(value = "select * from band as b inner join band_user as bu on b.id =
     // bu.band_id and bu.user_id = :userId", nativeQuery = true)

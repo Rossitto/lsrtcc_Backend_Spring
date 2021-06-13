@@ -62,18 +62,15 @@ public class BandController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Band> getByUserId(@PathVariable Long userId) {
+    public List<Band> getByUserId(@PathVariable Long userId) {
         User user = userRepository.findById(userId).get();
+
         if (user != null) {
 
-            Optional<Band> band = bandRepository.findByUser(user);
-
-            if (band.isPresent()) {
-                return ResponseEntity.ok(band.get());
-            }
+            return bandRepository.findByUser(user);
         }
+        return null;
 
-        return ResponseEntity.notFound().build();
     }
 
     @PostMapping

@@ -34,10 +34,18 @@ public class Band {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // RENAN: remover
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    // @OneToOne
+    // @JoinColumn(name = "user_id")
+    // private User user;
+
+    @ManyToMany
+    private List<User> user;
+
+    // EXEMPLO ManyToMany
+    // @ManyToMany
+    // @JoinTable(name = "matricula", joinColumns = @JoinColumn(name = "curso_id"),
+    // inverseJoinColumns = @JoinColumn(name = "aluno_id"))
+    // private List<Aluno> alunos;
 
     // RENAN: remover
     // @OneToMany(mappedBy = "band")
