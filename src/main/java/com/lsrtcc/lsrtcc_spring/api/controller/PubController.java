@@ -6,7 +6,9 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.lsrtcc.lsrtcc_spring.domain.model.Pub;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
 import com.lsrtcc.lsrtcc_spring.domain.repository.PubRepository;
+import com.lsrtcc.lsrtcc_spring.domain.repository.UserRepository;
 import com.lsrtcc.lsrtcc_spring.domain.service.RegisterPubService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class PubController {
     private PubRepository pubRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private RegisterPubService registerPubService;
 
     @GetMapping
@@ -50,9 +55,24 @@ public class PubController {
         return ResponseEntity.notFound().build();
     }
 
+    // @GetMapping("/user/{userId}")
+    // public List<Pub> getByUserId(@PathVariable Long userId) {
+    // return pubRepository.findByUser(userId);
+    // }
+
     @GetMapping("/user/{userId}")
-    public List<Pub> getByUserId(@PathVariable Long userId) {
-        return pubRepository.findByUser(userId);
+    public ResponseEntity<Pub> getByUserId(@PathVariable Long userId) {
+        User user = userRepository.findById(userId).get();
+        if (user != null) {
+
+            Optional<Pub> band = pubRepository.findByUser(user);
+
+            if (band.isPresent()) {
+                return ResponseEntity.ok(band.get());
+            }
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping

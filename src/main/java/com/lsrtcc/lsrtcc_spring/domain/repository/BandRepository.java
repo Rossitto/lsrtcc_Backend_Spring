@@ -1,8 +1,10 @@
 package com.lsrtcc.lsrtcc_spring.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.lsrtcc.lsrtcc_spring.domain.model.Band;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +21,8 @@ public interface BandRepository extends JpaRepository<Band, Long> {
     List<Band> findByNameContaining(String name);
 
     Band findByCnpj(String cnpj);
+
+    Optional<Band> findByUser(User user);
 
     // @Query(value = "select * from band as b inner join band_user as bu on b.id =
     // bu.band_id and bu.user_id = :userId", nativeQuery = true)

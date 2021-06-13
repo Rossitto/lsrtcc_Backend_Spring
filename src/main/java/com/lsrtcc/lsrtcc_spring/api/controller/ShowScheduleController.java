@@ -53,6 +53,21 @@ public class ShowScheduleController {
         return showScheduleRepository.findByBand(bandId);
     }
 
+    // @GetMapping("/band/{bandId}")
+    // public List<ShowSchedule> getByBandId(@PathVariable Long bandId) {
+    // User user = userRepository.findById(userId).get();
+    // if (user != null) {
+
+    // Optional<Pub> band = pubRepository.findByUser(user);
+
+    // if (band.isPresent()) {
+    // return ResponseEntity.ok(band.get());
+    // }
+    // }
+
+    // return ResponseEntity.notFound().build();
+    // }
+
     @GetMapping("/pub/{pubId}")
     public List<ShowSchedule> getByPubId(@PathVariable Long pubId) {
         return showScheduleRepository.findByPub(pubId);

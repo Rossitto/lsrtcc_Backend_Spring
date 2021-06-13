@@ -1,5 +1,7 @@
 package com.lsrtcc.lsrtcc_spring.domain.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -22,11 +24,17 @@ public class User {
     // @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(mappedBy = "user")
-    private Band band;
+    // RENAN: remover
+    // @OneToOne(mappedBy = "user")
+    // private Band band;
 
-    @OneToOne(mappedBy = "user")
-    private Pub pub;
+    // @OneToOne(mappedBy = "user")
+    // private Pub pub;
+
+    // EU REMOVI:
+    // @OneToMany
+    // @JoinColumn(name = "band_id")
+    // private List<Band> bands;
 
     @NotBlank
     @Size(max = 60)

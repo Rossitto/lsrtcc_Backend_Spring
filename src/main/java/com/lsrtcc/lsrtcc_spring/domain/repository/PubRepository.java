@@ -1,8 +1,10 @@
 package com.lsrtcc.lsrtcc_spring.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.lsrtcc.lsrtcc_spring.domain.model.Pub;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +21,8 @@ public interface PubRepository extends JpaRepository<Pub, Long> {
     Pub findByEmail(String email);
 
     Pub findByCnpj(String cnpj);
+
+    Optional<Pub> findByUser(User user);
 
     // @Query(value = "select * from pub as p inner join pub_manager as pm on p.id =
     // pm.pub_id where pm.user_id = :userId", nativeQuery = true)

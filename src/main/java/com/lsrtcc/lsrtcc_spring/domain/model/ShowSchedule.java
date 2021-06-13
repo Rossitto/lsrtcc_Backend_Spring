@@ -27,10 +27,12 @@ public class ShowSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @ManyToOne
     @JoinColumn(name = "pub_id", nullable = false)
     private Pub pub;
 
+    @NotBlank
     @ManyToOne
     @JoinColumn(name = "band_id", nullable = false)
     private Band band;

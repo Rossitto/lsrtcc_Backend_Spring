@@ -1,5 +1,7 @@
 package com.lsrtcc.lsrtcc_spring.domain.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,8 +35,9 @@ public class Pub {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "pub")
-    private ShowSchedule showSchedule;
+    // RENAN: remover
+    // @OneToMany(mappedBy = "pub")
+    // private List<ShowSchedule> showSchedule;
 
     @NotBlank
     @Size(max = 60)

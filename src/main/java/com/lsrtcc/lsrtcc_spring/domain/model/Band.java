@@ -34,12 +34,14 @@ public class Band {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // RENAN: remover
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "band")
-    private ShowSchedule showSchedule;
+    // RENAN: remover
+    // @OneToMany(mappedBy = "band")
+    // private List<ShowSchedule> showSchedule;
 
     // @ManyToMany
     // @JoinTable(name = "show_schedule", joinColumns = @JoinColumn(name =
@@ -53,9 +55,11 @@ public class Band {
     @Size(max = 22)
     private String cnpj;
 
+    @NotBlank
     @Size(max = 10)
     private double fee_brl;
 
+    @NotBlank
     @NumberFormat
     private int members_num;
 
