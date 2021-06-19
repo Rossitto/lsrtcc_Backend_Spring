@@ -3,6 +3,7 @@ package com.lsrtcc.lsrtcc_spring.domain.model;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class ShowSchedule {
     private Long id;
 
     @NotBlank
-    @ManyToOne
+    @ManyToOne // (fetch = FetchType.EAGER)
     @JoinColumn(name = "pub_id", nullable = false)
     private Pub pub;
 

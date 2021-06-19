@@ -47,14 +47,16 @@ public class ManageShowSchedule {
 
     }
 
-    // public ShowSchedule confirm(Long showScheduleId) {
-    // ShowSchedule showSchedule = find(showScheduleId);
+    public ShowSchedule confirm(Long showScheduleId) {
+        ShowSchedule showSchedule = find(showScheduleId);
 
-    // showSchedule.setConfirmed(true);
+        showSchedule.setConfirmed(true);
 
-    // return showScheduleRepository.save(showSchedule);
+        showSchedule.setConfirmed_at(LocalDateTime.now());
 
-    // }
+        return showScheduleRepository.save(showSchedule);
+
+    }
 
     // public void unconfirm(Long showScheduleId) {
     // ShowSchedule showSchedule = find(showScheduleId);
