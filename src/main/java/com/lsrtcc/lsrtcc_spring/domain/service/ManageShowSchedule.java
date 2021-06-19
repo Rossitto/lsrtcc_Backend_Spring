@@ -26,15 +26,18 @@ public class ManageShowSchedule {
     private PubRepository pubRepository;
 
     public ShowSchedule save(ShowSchedule showSchedule) {
-        Pub pub = pubRepository.findById(showSchedule.getPub().getId())
-                .orElseThrow(() -> new DomainException("Pub não encontrado"));
+        // Pub showSchedulePub = showSchedule.getPub();
+        // System.out.println(showSchedulePub);
 
-        Band band = bandRepository.findById(showSchedule.getBand().getId())
-                .orElseThrow(() -> new DomainException("Banda não encontrada"));
+        // Pub pub = pubRepository.findById(showSchedule.getPub().getId())
+        // .orElseThrow(() -> new DomainException("Pub não encontrado"));
 
-        showSchedule.setBand(band);
-        showSchedule.setPub(pub);
-        // showSchedule.setEvent_datetime(event_datetime);
+        // Band band = bandRepository.findById(showSchedule.getBand().getId())
+        // .orElseThrow(() -> new DomainException("Banda não encontrada"));
+
+        // showSchedule.setBand(band);
+        // showSchedule.setPub(pub);
+        // // showSchedule.setEvent_datetime(event_datetime);
 
         return showScheduleRepository.save(showSchedule);
     }
