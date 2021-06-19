@@ -26,7 +26,7 @@ public interface ShowScheduleRepository extends JpaRepository<ShowSchedule, Long
     // nativeQuery = true)
     // List<ShowSchedule> findByPub(@Param("pubId") Long pub_id);
 
-    List<ShowSchedule> findByBand(Band band);
+    List<ShowSchedule> findByBand(Optional<Band> band);
 
     List<ShowSchedule> findByPub(Optional<Pub> pub);
 

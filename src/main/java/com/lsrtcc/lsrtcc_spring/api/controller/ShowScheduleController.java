@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.lsrtcc.lsrtcc_spring.domain.model.Band;
 import com.lsrtcc.lsrtcc_spring.domain.model.Pub;
 import com.lsrtcc.lsrtcc_spring.domain.model.ShowSchedule;
+import com.lsrtcc.lsrtcc_spring.domain.repository.BandRepository;
 import com.lsrtcc.lsrtcc_spring.domain.repository.PubRepository;
 import com.lsrtcc.lsrtcc_spring.domain.repository.ShowScheduleRepository;
 import com.lsrtcc.lsrtcc_spring.domain.service.ManageShowSchedule;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,9 @@ public class ShowScheduleController {
     @Autowired
     PubRepository pubRepository;
 
+    @Autowired
+    BandRepository bandRepository;
+
     @GetMapping
     public List<ShowSchedule> getAll() {
         return showScheduleRepository.findAll();
@@ -54,38 +58,23 @@ public class ShowScheduleController {
         return ResponseEntity.notFound().build();
     }
 
-    // TODO: reativar getByBandId
-    // @GetMapping("/band/{bandId}")
-    // public List<ShowSchedule> getByBandId(@PathVariable Long bandId) {
-    // return showScheduleRepository.findByBand(bandId);
-    // }
-
-    // @GetMapping("/band/{bandId}")
-    // public List<ShowSchedule> getByBandId(@PathVariable Long bandId) {
-    // User user = userRepository.findById(userId).get();
-    // if (user != null) {
-
-    // Optional<Pub> band = pubRepository.findByUser(user);
-
-    // if (band.isPresent()) {
-    // return ResponseEntity.ok(band.get());
-    // }
-    // }
-
-    // return ResponseEntity.notFound().build();
-    // }
+    @GetMapping("/band/{bandId}")
+    public List<ShowSchedule> getByBandId(@PathVariable Long bandId) {
+        Optional<Band> band = bandRepository.findById(bandId);
+        if (band.isPresent()) {
+            return showScheduleRepository.findByBand(band);
+        }
+        return null;
+    }
 
     @GetMapping("/pub/{pubId}")
     public List<ShowSchedule> getByPubId(@PathVariable Long pubId) {
         Optional<Pub> pub = pubRepository.findById(pubId);
-
         if (pub.isPresent()) {
             return showScheduleRepository.findByPub(pub);
         }
-
         // return ResponseEntity.notFound().build();
         return null;
-
     }
 
     @PostMapping
