@@ -1,6 +1,7 @@
 package com.lsrtcc.lsrtcc_spring.domain.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.lsrtcc.lsrtcc_spring.domain.model.Band;
 import com.lsrtcc.lsrtcc_spring.domain.model.Pub;
@@ -27,6 +28,6 @@ public interface ShowScheduleRepository extends JpaRepository<ShowSchedule, Long
 
     List<ShowSchedule> findByBand(Band band);
 
-    List<ShowSchedule> findByPub(Pub pub);
+    List<ShowSchedule> findByPub(Optional<Pub> pub);
 
 }

@@ -3,8 +3,6 @@ package com.lsrtcc.lsrtcc_spring.domain.service;
 import java.time.LocalDateTime;
 
 import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
-import com.lsrtcc.lsrtcc_spring.domain.model.Band;
-import com.lsrtcc.lsrtcc_spring.domain.model.Pub;
 import com.lsrtcc.lsrtcc_spring.domain.model.ShowSchedule;
 import com.lsrtcc.lsrtcc_spring.domain.repository.BandRepository;
 import com.lsrtcc.lsrtcc_spring.domain.repository.PubRepository;
