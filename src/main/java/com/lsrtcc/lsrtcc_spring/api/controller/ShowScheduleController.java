@@ -97,20 +97,28 @@ public class ShowScheduleController {
         return ResponseEntity.ok(showSchedule);
     }
 
-    // TODO: implementar apenas confirmar com uma chamada PUT sem nenhum body
     @PutMapping("/{showId}/confirm")
-    public ResponseEntity<ShowSchedule> put(@Valid @PathVariable Long showId) {
+    public ResponseEntity<ShowSchedule> confirm(@Valid @PathVariable Long showId) {
 
         if (!showScheduleRepository.existsById(showId)) {
             return ResponseEntity.notFound().build();
         }
 
         ShowSchedule showSchedule;
-        // showSchedule.setId(showId);
         showSchedule = manageShowSchedule.confirm(showId);
-
         return ResponseEntity.ok(showSchedule);
+    }
 
+    @PutMapping("/{showId}/unconfirm")
+    public ResponseEntity<ShowSchedule> unconfirm(@Valid @PathVariable Long showId) {
+
+        if (!showScheduleRepository.existsById(showId)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ShowSchedule showSchedule;
+        showSchedule = manageShowSchedule.unconfirm(showId);
+        return ResponseEntity.ok(showSchedule);
     }
 
     @DeleteMapping("/{showId}")
