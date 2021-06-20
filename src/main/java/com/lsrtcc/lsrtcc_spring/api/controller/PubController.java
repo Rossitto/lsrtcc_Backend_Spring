@@ -60,19 +60,31 @@ public class PubController {
     // return pubRepository.findByUser(userId);
     // }
 
+    // ! alterado para List<Pub>
+    // @GetMapping("/user/{userId}")
+    // public ResponseEntity<Pub> getByUserId(@PathVariable Long userId) {
+    // User user = userRepository.findById(userId).get();
+    // if (user != null) {
+
+    // Optional<Pub> band = pubRepository.findByUser(user);
+
+    // if (band.isPresent()) {
+    // return ResponseEntity.ok(band.get());
+    // }
+    // }
+    // return ResponseEntity.notFound().build();
+    // }
+
+    // ? Novo get PubsByUserId
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Pub> getByUserId(@PathVariable Long userId) {
+    public List<Pub> getByUserId(@PathVariable Long userId) {
         User user = userRepository.findById(userId).get();
+
         if (user != null) {
-
-            Optional<Pub> band = pubRepository.findByUser(user);
-
-            if (band.isPresent()) {
-                return ResponseEntity.ok(band.get());
-            }
+            return pubRepository.findByUser(user);
         }
+        return null;
 
-        return ResponseEntity.notFound().build();
     }
 
     @PostMapping

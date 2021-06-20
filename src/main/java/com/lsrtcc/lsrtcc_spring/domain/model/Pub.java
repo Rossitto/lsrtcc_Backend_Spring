@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -30,7 +31,13 @@ public class Pub {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    // ? Testando ManyToOne
+    // @OneToOne
+    // @JoinColumn(name = "user_id")
+    // private User user;
+
+    // TODO: testar Pub ManyToOne User
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
