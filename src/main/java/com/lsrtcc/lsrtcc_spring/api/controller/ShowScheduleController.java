@@ -8,12 +8,15 @@ import javax.validation.Valid;
 import com.lsrtcc.lsrtcc_spring.domain.model.Band;
 import com.lsrtcc.lsrtcc_spring.domain.model.Pub;
 import com.lsrtcc.lsrtcc_spring.domain.model.ShowSchedule;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
 import com.lsrtcc.lsrtcc_spring.domain.repository.BandRepository;
 import com.lsrtcc.lsrtcc_spring.domain.repository.PubRepository;
 import com.lsrtcc.lsrtcc_spring.domain.repository.ShowScheduleRepository;
+import com.lsrtcc.lsrtcc_spring.domain.repository.UserRepository;
 import com.lsrtcc.lsrtcc_spring.domain.service.ManageShowSchedule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,6 +44,9 @@ public class ShowScheduleController {
 
     @Autowired
     BandRepository bandRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping
     public List<ShowSchedule> getAll() {
@@ -72,6 +78,17 @@ public class ShowScheduleController {
         Optional<Pub> pub = pubRepository.findById(pubId);
         if (pub.isPresent()) {
             return showScheduleRepository.findByPub(pub);
+        }
+        // return ResponseEntity.notFound().build();
+        return null;
+    }
+
+    // TODO: get Shows by userId
+    @GetMapping("/user/{userId}")
+    public List<ShowSchedule> getByUserId(@PathVariable Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            return showScheduleRepository.findByUser(userId);
         }
         // return ResponseEntity.notFound().build();
         return null;
