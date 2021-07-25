@@ -83,7 +83,6 @@ public class ShowScheduleController {
         return null;
     }
 
-    // TODO: get Shows by userId
     @GetMapping("/user/{userId}")
     public List<ShowSchedule> getByUserId(@PathVariable Long userId) {
         Optional<User> user = userRepository.findById(userId);
