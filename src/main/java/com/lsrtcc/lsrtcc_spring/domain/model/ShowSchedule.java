@@ -40,7 +40,7 @@ public class ShowSchedule {
     @NotBlank
     private LocalDateTime show_datetime;
 
-    private boolean requestedByBand;
+    private boolean requested_by_band;
 
     private boolean confirmed;
 
