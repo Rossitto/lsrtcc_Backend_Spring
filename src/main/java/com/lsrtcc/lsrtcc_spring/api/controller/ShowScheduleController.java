@@ -1,6 +1,8 @@
 package com.lsrtcc.lsrtcc_spring.api.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
@@ -150,6 +153,17 @@ public class ShowScheduleController {
         manageShowSchedule.delete(showId);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{showId}/user/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> wasRequestedByUser(@PathVariable Long showId, @PathVariable Long userId) {
+
+        Long result = manageShowSchedule.wasRequestedByUser(showId, userId);
+
+        String result_string = result == 0 ? "false" : "true";
+
+        return ResponseEntity.ok(result_string);
     }
 
 }

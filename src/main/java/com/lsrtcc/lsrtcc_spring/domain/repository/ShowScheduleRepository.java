@@ -34,4 +34,9 @@ public interface ShowScheduleRepository extends JpaRepository<ShowSchedule, Long
     @Query(value = "select distinct ss.* from show_schedule ss left join pub p on p.user_id = :userId left join band_user bu on bu.user_id = :userId left join band b on bu.band_id = b.id where ss.pub_id = p.id or(ss.band_id = bu.band_id and ss.band_id = b.id) ;", nativeQuery = true)
     List<ShowSchedule> findByUser(Long userId);
 
+    String queryWasRequestedByUser = "select case when (user_band_id = band_id and requested_by_band is true) then true when (user_pub_id = pub_id and requested_by_band is false) then true else false end as requested_by_user from ( select distinct ss.* , b.id user_band_id, p.id user_pub_id from show_schedule ss left join pub p on p.user_id = :userId and ss.pub_id = p.id left join band_user bu on bu.user_id = :userId and ss.band_id = bu.band_id left join band b on bu.band_id = b.id where ss.pub_id = p.id or(ss.band_id = bu.band_id and ss.band_id = b.id) and ss.id = :showScheduleId limit 1 ) as query1;";
+
+    @Query(value = queryWasRequestedByUser, nativeQuery = true)
+    Long wasRequestedByUser(Long userId, Long showScheduleId);
+
 }

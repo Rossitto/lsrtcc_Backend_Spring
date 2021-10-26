@@ -1,6 +1,7 @@
 package com.lsrtcc.lsrtcc_spring.domain.service;
 
 import java.time.LocalDateTime;
+import java.util.function.LongBinaryOperator;
 
 import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
 import com.lsrtcc.lsrtcc_spring.domain.model.ShowSchedule;
@@ -66,6 +67,11 @@ public class ManageShowSchedule {
 
     public void delete(Long showScheduleId) {
         showScheduleRepository.deleteById(showScheduleId);
+    }
+
+    public Long wasRequestedByUser(Long showScheduleId, Long userId) {
+
+        return showScheduleRepository.wasRequestedByUser(userId, showScheduleId);
     }
 
 }
