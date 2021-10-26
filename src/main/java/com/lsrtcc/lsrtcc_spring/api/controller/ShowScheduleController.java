@@ -85,6 +85,7 @@ public class ShowScheduleController {
 
     @GetMapping("/user/{userId}")
     public List<ShowSchedule> getByUserId(@PathVariable Long userId) {
+
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
             return showScheduleRepository.findByUser(userId);

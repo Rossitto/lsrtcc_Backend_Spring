@@ -31,13 +31,7 @@ public interface ShowScheduleRepository extends JpaRepository<ShowSchedule, Long
 
     List<ShowSchedule> findByPub(Optional<Pub> pub);
 
-    // String queryGetShowsByUser = "select distinct ss.* from
-    // lsrtcc_v3.show_schedule ss left join lsrtcc_v3.pub p on p.user_id = :userId
-    // left join lsrtcc_v3.band_user bu on bu.user_id = :userId left join
-    // lsrtcc_v3.band b on bu.band_id = b.id where ss.pub_id = p.id or(ss.band_id =
-    // bu.band_id and ss.band_id = b.id) ;";
-
-    @Query(value = "select distinct ss.* from lsrtcc_v3.show_schedule ss left join lsrtcc_v3.pub p on p.user_id = :userId left join lsrtcc_v3.band_user bu on bu.user_id = :userId left join lsrtcc_v3.band b on bu.band_id = b.id where ss.pub_id = p.id or(ss.band_id = bu.band_id and ss.band_id = b.id) ;", nativeQuery = true)
+    @Query(value = "select distinct ss.* from show_schedule ss left join pub p on p.user_id = :userId left join band_user bu on bu.user_id = :userId left join band b on bu.band_id = b.id where ss.pub_id = p.id or(ss.band_id = bu.band_id and ss.band_id = b.id) ;", nativeQuery = true)
     List<ShowSchedule> findByUser(Long userId);
 
 }
