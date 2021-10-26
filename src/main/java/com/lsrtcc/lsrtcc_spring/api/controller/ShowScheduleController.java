@@ -114,6 +114,7 @@ public class ShowScheduleController {
     }
 
     @PutMapping("/{showId}/confirm")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ShowSchedule> confirm(@Valid @PathVariable Long showId) {
 
         if (!showScheduleRepository.existsById(showId)) {
@@ -126,6 +127,7 @@ public class ShowScheduleController {
     }
 
     @PutMapping("/{showId}/unconfirm")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ShowSchedule> unconfirm(@Valid @PathVariable Long showId) {
 
         if (!showScheduleRepository.existsById(showId)) {
@@ -138,6 +140,7 @@ public class ShowScheduleController {
     }
 
     @DeleteMapping("/{showId}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> delete(@PathVariable("showId") Long showId) {
         if (!showScheduleRepository.existsById(showId)) {
             return ResponseEntity.notFound().build();

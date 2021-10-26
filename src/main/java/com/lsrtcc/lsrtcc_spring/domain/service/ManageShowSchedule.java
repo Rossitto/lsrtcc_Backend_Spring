@@ -28,10 +28,12 @@ public class ManageShowSchedule {
         return showScheduleRepository.save(showSchedule);
     }
 
-    public void changeDateTime(Long showScheduleId, LocalDateTime dateTime) {
+    public ShowSchedule changeDateTime(Long showScheduleId, LocalDateTime dateTime) {
         ShowSchedule showSchedule = find(showScheduleId);
 
         showSchedule.setShow_datetime(dateTime);
+
+        return showScheduleRepository.save(showSchedule);
 
     }
 
