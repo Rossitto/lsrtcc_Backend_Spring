@@ -97,6 +97,24 @@ public class ShowScheduleController {
         return null;
     }
 
+    @GetMapping("/user/{userId}/pending")
+    public List<ShowSchedule> getByUserIdPending(@PathVariable Long userId) {
+
+        return showScheduleRepository.findByUserPending(userId);
+    }
+
+    @GetMapping("/user/{userId}/awaiting")
+    public List<ShowSchedule> getByUserIdAwaiting(@PathVariable Long userId) {
+
+        return showScheduleRepository.findByUserAwaiting(userId);
+    }
+
+    @GetMapping("/user/{userId}/confirmed")
+    public List<ShowSchedule> getByUserIdConfirmed(@PathVariable Long userId) {
+
+        return showScheduleRepository.findByUserConfirmed(userId);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ShowSchedule add(@Valid @RequestBody ShowSchedule showSchedule) {

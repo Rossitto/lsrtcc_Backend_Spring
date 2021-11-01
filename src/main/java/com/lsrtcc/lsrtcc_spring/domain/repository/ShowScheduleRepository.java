@@ -39,4 +39,19 @@ public interface ShowScheduleRepository extends JpaRepository<ShowSchedule, Long
     @Query(value = queryWasRequestedByUser, nativeQuery = true)
     Long wasRequestedByUser(Long userId, Long showScheduleId);
 
+    String queryFindByUserPending = "select s.* from user u inner join band_user bu on bu.user_id = u.id inner join band b on b.id = bu.band_id inner join show_schedule s on s.band_id = b.id where u.id = :userId and s.confirmed is false and s.requested_by_band is false UNION ALL select s.* from user u inner join pub p on p.user_id = u.id inner join show_schedule s on s.pub_id = p.id where u.id = :userId and s.confirmed is false and s.requested_by_band is true ;";
+
+    @Query(value = queryFindByUserPending, nativeQuery = true)
+    List<ShowSchedule> findByUserPending(Long userId);
+
+    String queryFindByUserAwaiting = "select s.* from user u inner join pub p on p.user_id = u.id inner join show_schedule s on s.pub_id = p.id where u.id = :userId and s.confirmed is false and s.requested_by_band is false UNION ALL select s.* from user u inner join band_user bu on bu.user_id = u.id inner join band b on b.id = bu.band_id inner join show_schedule s on s.band_id = b.id where u.id = :userId and s.confirmed is false and s.requested_by_band is true ;";
+
+    @Query(value = queryFindByUserAwaiting, nativeQuery = true)
+    List<ShowSchedule> findByUserAwaiting(Long userId);
+
+    String queryFindByUserConfirmed = "select s.* from user u inner join band_user bu on bu.user_id = u.id inner join band b on b.id = bu.band_id inner join show_schedule s on s.band_id = b.id where u.id = :userId and s.confirmed is true and s.confirmed_at is not null UNION ALL select s.* from user u inner join pub p on p.user_id = u.id inner join show_schedule s on s.pub_id = p.id where u.id = :userId and s.confirmed is true and s.confirmed_at is not null ;";
+
+    @Query(value = queryFindByUserConfirmed, nativeQuery = true)
+    List<ShowSchedule> findByUserConfirmed(Long userId);
+
 }
