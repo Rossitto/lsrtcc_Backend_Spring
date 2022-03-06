@@ -1,21 +1,56 @@
 package com.lsrtcc.lsrtcc_spring.domain.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.NumberFormat;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "band")
 @Entity
 public class Band {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // @OneToOne
+    // @JoinColumn(name = "user_id")
+    // private User user;
+
+    @ManyToMany
+    private List<User> user;
+
+    // EXEMPLO ManyToMany
+    // @ManyToMany
+    // @JoinTable(name = "matricula", joinColumns = @JoinColumn(name = "curso_id"),
+    // inverseJoinColumns = @JoinColumn(name = "aluno_id"))
+    // private List<Aluno> alunos;
+
+    // RENAN: remover
+    // @OneToMany(mappedBy = "band")
+    // private List<ShowSchedule> showSchedule;
+
+    // @ManyToMany
+    // @JoinTable(name = "show_schedule", joinColumns = @JoinColumn(name =
+    // "band_id"), inverseJoinColumns = @JoinColumn(name = "pub_id"))
+    // private List<Pub> pubs;
 
     @NotBlank
     @Size(max = 30)
@@ -24,14 +59,14 @@ public class Band {
     @Size(max = 22)
     private String cnpj;
 
-    // TODO: incluir @NumberFormat ?
+    @NotBlank
     @Size(max = 10)
     private double fee_brl;
 
+    @NotBlank
     @NumberFormat
     private int members_num;
 
-    // TODO: maybe make it a ENUM someday
     @Size(max = 50)
     private String style;
 
@@ -43,94 +78,5 @@ public class Band {
     @Email
     @Size(max = 100)
     private String email;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-
-    public double getFee_brl() {
-        return fee_brl;
-    }
-
-    public void setFee_brl(double fee_brl) {
-        this.fee_brl = fee_brl;
-    }
-
-    public int getMembers_num() {
-        return members_num;
-    }
-
-    public void setMembers_num(int members_num) {
-        this.members_num = members_num;
-    }
-
-    public String getStyle() {
-        return style;
-    }
-
-    public void setStyle(String style) {
-        this.style = style;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Band other = (Band) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
-    }
 
 }

@@ -5,11 +5,19 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import com.lsrtcc.lsrtcc_spring.domain.model.Band;
+import com.lsrtcc.lsrtcc_spring.domain.model.Pub;
 import com.lsrtcc.lsrtcc_spring.domain.model.ShowSchedule;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
+import com.lsrtcc.lsrtcc_spring.domain.repository.BandRepository;
+import com.lsrtcc.lsrtcc_spring.domain.repository.PubRepository;
 import com.lsrtcc.lsrtcc_spring.domain.repository.ShowScheduleRepository;
+import com.lsrtcc.lsrtcc_spring.domain.repository.UserRepository;
 import com.lsrtcc.lsrtcc_spring.domain.service.ManageShowSchedule;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/shows")
@@ -32,6 +37,15 @@ public class ShowScheduleController {
 
     @Autowired
     ManageShowSchedule manageShowSchedule;
+
+    @Autowired
+    PubRepository pubRepository;
+
+    @Autowired
+    BandRepository bandRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping
     public List<ShowSchedule> getAll() {
@@ -51,12 +65,50 @@ public class ShowScheduleController {
 
     @GetMapping("/band/{bandId}")
     public List<ShowSchedule> getByBandId(@PathVariable Long bandId) {
-        return showScheduleRepository.findByBand(bandId);
+        Optional<Band> band = bandRepository.findById(bandId);
+        if (band.isPresent()) {
+            return showScheduleRepository.findByBand(band);
+        }
+        return null;
     }
 
     @GetMapping("/pub/{pubId}")
     public List<ShowSchedule> getByPubId(@PathVariable Long pubId) {
-        return showScheduleRepository.findByPub(pubId);
+        Optional<Pub> pub = pubRepository.findById(pubId);
+        if (pub.isPresent()) {
+            return showScheduleRepository.findByPub(pub);
+        }
+        // return ResponseEntity.notFound().build();
+        return null;
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<ShowSchedule> getByUserId(@PathVariable Long userId) {
+
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            return showScheduleRepository.findByUser(userId);
+        }
+        // return ResponseEntity.notFound().build();
+        return null;
+    }
+
+    @GetMapping("/user/{userId}/pending")
+    public List<ShowSchedule> getByUserIdPending(@PathVariable Long userId) {
+
+        return showScheduleRepository.findByUserPending(userId);
+    }
+
+    @GetMapping("/user/{userId}/awaiting")
+    public List<ShowSchedule> getByUserIdAwaiting(@PathVariable Long userId) {
+
+        return showScheduleRepository.findByUserAwaiting(userId);
+    }
+
+    @GetMapping("/user/{userId}/confirmed")
+    public List<ShowSchedule> getByUserIdConfirmed(@PathVariable Long userId) {
+
+        return showScheduleRepository.findByUserConfirmed(userId);
     }
 
     @PostMapping
@@ -66,6 +118,7 @@ public class ShowScheduleController {
     }
 
     @PutMapping("/{showId}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ShowSchedule> put(@Valid @PathVariable Long showId, @RequestBody ShowSchedule showSchedule) {
 
         if (!showScheduleRepository.existsById(showId)) {
@@ -78,23 +131,34 @@ public class ShowScheduleController {
         return ResponseEntity.ok(showSchedule);
     }
 
-    // TODO: implementar apenas confirmar com uma chamada PUT sem nenhum body
-    // @PutMapping("/{showId}/confirm")
-    // public ResponseEntity<ShowSchedule> put(@Valid @PathVariable Long showId) {
+    @PutMapping("/{showId}/confirm")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ShowSchedule> confirm(@Valid @PathVariable Long showId) {
 
-    // if (!showScheduleRepository.existsById(showId)) {
-    // return ResponseEntity.notFound().build();
-    // }
+        if (!showScheduleRepository.existsById(showId)) {
+            return ResponseEntity.notFound().build();
+        }
 
-    // ShowSchedule showSchedule;
-    // showSchedule.setId(showId);
-    // showSchedule = manageShowSchedule.confirm(showId);
+        ShowSchedule showSchedule;
+        showSchedule = manageShowSchedule.confirm(showId);
+        return ResponseEntity.ok(showSchedule);
+    }
 
-    // return ResponseEntity.ok(showSchedule);
+    @PutMapping("/{showId}/unconfirm")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ShowSchedule> unconfirm(@Valid @PathVariable Long showId) {
 
-    // }
+        if (!showScheduleRepository.existsById(showId)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ShowSchedule showSchedule;
+        showSchedule = manageShowSchedule.unconfirm(showId);
+        return ResponseEntity.ok(showSchedule);
+    }
 
     @DeleteMapping("/{showId}")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Void> delete(@PathVariable("showId") Long showId) {
         if (!showScheduleRepository.existsById(showId)) {
             return ResponseEntity.notFound().build();
@@ -103,6 +167,17 @@ public class ShowScheduleController {
         manageShowSchedule.delete(showId);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{showId}/user/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<String> wasRequestedByUser(@PathVariable Long showId, @PathVariable Long userId) {
+
+        Long result = manageShowSchedule.wasRequestedByUser(showId, userId);
+
+        String result_string = result == 0 ? "false" : "true";
+
+        return ResponseEntity.ok(result_string);
     }
 
 }

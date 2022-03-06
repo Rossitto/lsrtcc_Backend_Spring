@@ -1,11 +1,8 @@
 package com.lsrtcc.lsrtcc_spring.domain.service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
-import com.lsrtcc.lsrtcc_spring.domain.model.Band;
-import com.lsrtcc.lsrtcc_spring.domain.model.Pub;
 import com.lsrtcc.lsrtcc_spring.domain.model.ShowSchedule;
 import com.lsrtcc.lsrtcc_spring.domain.repository.BandRepository;
 import com.lsrtcc.lsrtcc_spring.domain.repository.PubRepository;
@@ -27,58 +24,53 @@ public class ManageShowSchedule {
     private PubRepository pubRepository;
 
     public ShowSchedule save(ShowSchedule showSchedule) {
-        Pub pub = pubRepository.findById(showSchedule.getPub_id())
-                .orElseThrow(() -> new DomainException("Pub não encontrado"));
-
-        Band band = bandRepository.findById(showSchedule.getBand_id())
-                .orElseThrow(() -> new DomainException("Banda não encontrada"));
-
-        showSchedule.setBand_id(band.getId());
-        showSchedule.setPub_id(pub.getId());
-        // showSchedule.setEvent_datetime(event_datetime);
 
         return showScheduleRepository.save(showSchedule);
     }
 
-    public void changeDateTime(Long showScheduleId, LocalDateTime dateTime) {
+    public ShowSchedule changeDateTime(Long showScheduleId, LocalDateTime dateTime) {
         ShowSchedule showSchedule = find(showScheduleId);
 
         showSchedule.setShow_datetime(dateTime);
 
+        return showScheduleRepository.save(showSchedule);
+
     }
 
-    // public ShowSchedule confirm(Long showScheduleId) {
-    // ShowSchedule showSchedule = find(showScheduleId);
+    public ShowSchedule confirm(Long showScheduleId) {
+        ShowSchedule showSchedule = find(showScheduleId);
 
-    // showSchedule.setConfirmed(true);
+        showSchedule.setConfirmed(true);
 
-    // return showScheduleRepository.save(showSchedule);
+        showSchedule.setConfirmed_at(LocalDateTime.now());
 
-    // }
+        return showScheduleRepository.save(showSchedule);
 
-    // public void unconfirm(Long showScheduleId) {
-    // ShowSchedule showSchedule = find(showScheduleId);
+    }
 
-    // showSchedule.setConfirmed(false);
+    public ShowSchedule unconfirm(Long showScheduleId) {
+        ShowSchedule showSchedule = find(showScheduleId);
 
-    // }
+        showSchedule.setConfirmed(false);
+
+        showSchedule.setConfirmed_at(null);
+
+        return showScheduleRepository.save(showSchedule);
+
+    }
 
     private ShowSchedule find(Long showScheduleId) {
         return showScheduleRepository.findById(showScheduleId)
                 .orElseThrow(() -> new DomainException("Show não encontrado"));
     }
 
-    // public List<ShowSchedule> findByBand(Long bandId) {
-    // try {
-    // return showScheduleRepository.findByBand(bandId);
-    // } catch (Exception e) {
-    // throw new DomainException("Show não encontrado");
-    // }
-
-    // }
-
     public void delete(Long showScheduleId) {
         showScheduleRepository.deleteById(showScheduleId);
+    }
+
+    public Long wasRequestedByUser(Long showScheduleId, Long userId) {
+
+        return showScheduleRepository.wasRequestedByUser(userId, showScheduleId);
     }
 
 }

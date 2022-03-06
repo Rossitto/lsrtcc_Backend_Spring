@@ -8,7 +8,9 @@ import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 import com.lsrtcc.lsrtcc_spring.domain.model.Band;
+import com.lsrtcc.lsrtcc_spring.domain.model.User;
 import com.lsrtcc.lsrtcc_spring.domain.repository.BandRepository;
+import com.lsrtcc.lsrtcc_spring.domain.repository.UserRepository;
 import com.lsrtcc.lsrtcc_spring.domain.service.RegisterBandService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,9 @@ public class BandController {
     private BandRepository bandRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private RegisterBandService registerBandService;
 
     // @GetMapping(produces = "application/json; charset=UFT-8")
@@ -58,7 +63,14 @@ public class BandController {
 
     @GetMapping("/user/{userId}")
     public List<Band> getByUserId(@PathVariable Long userId) {
-        return bandRepository.findByUser(userId);
+        User user = userRepository.findById(userId).get();
+
+        if (user != null) {
+
+            return bandRepository.findByUser(user);
+        }
+        return null;
+
     }
 
     @PostMapping

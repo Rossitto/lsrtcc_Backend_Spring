@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -25,12 +27,20 @@ public class ShowSchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long pub_id;
+    @NotBlank
+    @ManyToOne // (fetch = FetchType.EAGER)
+    @JoinColumn(name = "pub_id", nullable = false)
+    private Pub pub;
 
-    private Long band_id;
+    @NotBlank
+    @ManyToOne
+    @JoinColumn(name = "band_id", nullable = false)
+    private Band band;
 
     @NotBlank
     private LocalDateTime show_datetime;
+
+    private boolean requested_by_band;
 
     private boolean confirmed;
 

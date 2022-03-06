@@ -1,0 +1,32 @@
+
+RELACIONAMENTOS:
+https://github.com/algaworks/live-mapeamento-relacionamentos-jpa
+
+
+OneToOne
+- perde sentido ter usuário
+- necessário mexer no front e back
+
+
+ManyToMany -> ESCOLHIDO
+- mais coerente
+- nao precisa mexer no front
+- ajustar apenas back pra funcionar (gravar)
+- possível melhoria futura
+
+
+
+USER - BANDA
+OneToOne
+
+USER - PUB  
+OneToOne
+
+BANDA - ShowSchedule
+OneToMany
+
+PUB - ShowSchedule
+OneToMany
+
+BANDA - PUB
+ManyToMany
