@@ -1,7 +1,6 @@
 package com.lsrtcc.lsrtcc_spring.domain.service;
 
 import java.time.LocalDateTime;
-import java.util.function.LongBinaryOperator;
 
 import com.lsrtcc.lsrtcc_spring.domain.exception.DomainException;
 import com.lsrtcc.lsrtcc_spring.domain.model.ShowSchedule;
